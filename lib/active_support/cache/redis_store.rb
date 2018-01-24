@@ -54,9 +54,9 @@ module ActiveSupport
                   pool_options[:size]    = options[:pool_size] if options[:pool_size]
                   pool_options[:timeout] = options[:pool_timeout] if options[:pool_timeout]
                   @pooled = true
-                  ::ConnectionPool.new(pool_options) { ::Redis::Store::Factory.create(*addresses) }
+                  ::ConnectionPool.new(pool_options) { ::Redis::Store::Factory.create(*addresses, @options) }
                 else
-                  ::Redis::Store::Factory.create(*addresses)
+                  ::Redis::Store::Factory.create(*addresses, @options)
                 end
 
         super(@options)
